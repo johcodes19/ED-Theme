@@ -24,7 +24,7 @@
     <meta property="og:image:secure_url" content="https:{{ page_image | img_url: '1200x630' }}">
   {% endif %}
   
-  {{ 'empire-domination.css' | asset_url | stylesheet_tag }}
+  <link rel="stylesheet" href="{{ 'empire-domination.css' | asset_url }}" type="text/css">
   
   {{ content_for_header }}
   
