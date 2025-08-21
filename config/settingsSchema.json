@@ -1,0 +1,241 @@
+[
+  {
+    "name": "Empire Domination Settings",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Empire Branding"
+      },
+      {
+        "type": "color",
+        "id": "empire_primary_color",
+        "label": "Empire Gold Color",
+        "default": "#FFD700"
+      },
+      {
+        "type": "color",
+        "id": "empire_secondary_color",
+        "label": "Empire Black Color",
+        "default": "#000000"
+      },
+      {
+        "type": "image_picker",
+        "id": "empire_logo",
+        "label": "Empire Logo"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "min": 50,
+        "max": 500,
+        "step": 10,
+        "unit": "px",
+        "label": "Logo Width",
+        "default": 250
+      }
+    ]
+  },
+  {
+    "name": "Hero Section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "hero_badge_text",
+        "label": "Hero Badge Text",
+        "default": "For Executives Who Refuse to Compete"
+      },
+      {
+        "type": "textarea",
+        "id": "hero_title",
+        "label": "Hero Title",
+        "default": "Don't Compete.<br>Dominate."
+      },
+      {
+        "type": "textarea",
+        "id": "hero_subtitle",
+        "label": "Hero Subtitle",
+        "default": "Premium templates, strategies, and solutions for market leaders who think beyond competition."
+      },
+      {
+        "type": "text",
+        "id": "primary_cta_text",
+        "label": "Primary CTA Text",
+        "default": "Build Your Empire"
+      },
+      {
+        "type": "text",
+        "id": "secondary_cta_text",
+        "label": "Secondary CTA Text",
+        "default": "Discover Domination"
+      },
+      {
+        "type": "image_picker",
+        "id": "hero_background",
+        "label": "Hero Background Image"
+      }
+    ]
+  },
+  {
+    "name": "Products Section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "products_title",
+        "label": "Products Section Title",
+        "default": "Domination Arsenal"
+      },
+      {
+        "type": "textarea",
+        "id": "products_subtitle",
+        "label": "Products Section Subtitle",
+        "default": "Exclusive tools and templates designed for those who lead, not follow."
+      },
+      {
+        "type": "collection",
+        "id": "featured_collection",
+        "label": "Featured Products Collection"
+      },
+      {
+        "type": "text",
+        "id": "product_cta_text",
+        "label": "Product CTA Text",
+        "default": "Dominate Now"
+      }
+    ]
+  },
+  {
+    "name": "Stats Section",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Stat 1"
+      },
+      {
+        "type": "text",
+        "id": "stat_1_number",
+        "label": "Stat 1 Number",
+        "default": "147+"
+      },
+      {
+        "type": "text",
+        "id": "stat_1_label",
+        "label": "Stat 1 Label",
+        "default": "Premium Templates"
+      },
+      {
+        "type": "header",
+        "content": "Stat 2"
+      },
+      {
+        "type": "text",
+        "id": "stat_2_number",
+        "label": "Stat 2 Number",
+        "default": "98%"
+      },
+      {
+        "type": "text",
+        "id": "stat_2_label",
+        "label": "Stat 2 Label",
+        "default": "Client Success Rate"
+      },
+      {
+        "type": "header",
+        "content": "Stat 3"
+      },
+      {
+        "type": "text",
+        "id": "stat_3_number",
+        "label": "Stat 3 Number",
+        "default": "50+"
+      },
+      {
+        "type": "text",
+        "id": "stat_3_label",
+        "label": "Stat 3 Label",
+        "default": "Industries Dominated"
+      },
+      {
+        "type": "header",
+        "content": "Stat 4"
+      },
+      {
+        "type": "text",
+        "id": "stat_4_number",
+        "label": "Stat 4 Number",
+        "default": "24/7"
+      },
+      {
+        "type": "text",
+        "id": "stat_4_label",
+        "label": "Stat 4 Label",
+        "default": "Empire Support"
+      }
+    ]
+  },
+  {
+    "name": "Testimonials",
+    "settings": [
+      {
+        "type": "text",
+        "id": "testimonials_title",
+        "label": "Testimonials Title",
+        "default": "Victory Stories"
+      },
+      {
+        "type": "text",
+        "id": "testimonials_subtitle",
+        "label": "Testimonials Subtitle",
+        "default": "From our empire builders who chose domination over competition"
+      },
+      {
+        "type": "textarea",
+        "id": "testimonial_1_text",
+        "label": "Testimonial 1 Text",
+        "default": "Empire Domination didn't just give me templates - they gave me a new way of thinking."
+      },
+      {
+        "type": "text",
+        "id": "testimonial_1_author",
+        "label": "Testimonial 1 Author",
+        "default": "Sarah K., CEO Tech Startup"
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "url",
+        "id": "social_twitter_link",
+        "label": "Twitter URL"
+      },
+      {
+        "type": "url",
+        "id": "social_linkedin_link",
+        "label": "LinkedIn URL"
+      },
+      {
+        "type": "text",
+        "id": "social_email_link",
+        "label": "Contact Email"
+      }
+    ]
+  },
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "text",
+        "id": "footer_tagline",
+        "label": "Footer Tagline",
+        "default": "For those who lead, not follow."
+      },
+      {
+        "type": "text",
+        "id": "footer_slogan",
+        "label": "Footer Slogan",
+        "default": "Don't Compete. Dominate."
+      }
+    ]
+  }
+]

@@ -1,0 +1,62 @@
+{% comment %}
+=== snippets/empire-social-share.liquid ===
+Social sharing buttons
+Usage: {% render 'empire-social-share', url: product.url, title: product.title, image: product.featured_image %}
+{% endcomment %}
+
+<div class="social-share-container">
+    {% if show_label %}
+        <span class="share-label">{{ share_label | default: "Share Your Victory:" }}</span>
+    {% endif %}
+    
+    <div class="social-share-buttons">
+        <a href="https://twitter.com/intent/tweet?url={{ shop.url }}{{ url | url_encode }}&text={{ title | url_encode }}" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="share-btn share-twitter"
+           aria-label="Share on Twitter">
+            🐦
+        </a>
+        
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url }}{{ url | url_encode }}" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="share-btn share-facebook"
+           aria-label="Share on Facebook">
+            📘
+        </a>
+        
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ shop.url }}{{ url | url_encode }}" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="share-btn share-linkedin"
+           aria-label="Share on LinkedIn">
+            💼
+        </a>
+        
+        <a href="mailto:?subject={{ title | url_encode }}&body=Check out this empire builder: {{ shop.url }}{{ url | url_encode }}" 
+           class="share-btn share-email"
+           aria-label="Share via Email">
+            📧
+        </a>
+        
+        <button class="share-btn share-copy" 
+                onclick="copyToClipboard('{{ shop.url }}{{ url }}')"
+                aria-label="Copy link">
+            📋
+        </button>
+    </div>
+</div>
+
+<script>
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(function() {
+        const btn = event.target;
+        const original = btn.textContent;
+        btn.textContent = '✅';
+        setTimeout(() => {
+            btn.textContent = original;
+        }, 2000);
+    });
+}
+</script>

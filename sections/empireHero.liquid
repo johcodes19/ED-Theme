@@ -1,0 +1,758 @@
+{% comment %}
+Empire Domination Hero Section
+Features: Animated background, customizable content, CTA buttons, mobile responsive
+{% endcomment %}
+
+<div class="background-animation"></div>
+
+<nav class="nav" id="main-nav">
+    <div class="nav-container">
+        <div class="logo">
+            {% if section.settings.logo_text != blank %}
+                {{ section.settings.logo_text }}
+            {% else %}
+                {{ shop.name | default: "Empire Domination" }}
+            {% endif %}
+        </div>
+        <ul class="nav-links">
+            {% if section.settings.nav_link_1_text != blank %}
+                <li><a href="{{ section.settings.nav_link_1_url | default: '#products' }}">{{ section.settings.nav_link_1_text }}</a></li>
+            {% endif %}
+            {% if section.settings.nav_link_2_text != blank %}
+                <li><a href="{{ section.settings.nav_link_2_url | default: '#about' }}">{{ section.settings.nav_link_2_text }}</a></li>
+            {% endif %}
+            {% if section.settings.nav_link_3_text != blank %}
+                <li><a href="{{ section.settings.nav_link_3_url | default: '#testimonials' }}">{{ section.settings.nav_link_3_text }}</a></li>
+            {% endif %}
+            {% if section.settings.nav_link_4_text != blank %}
+                <li><a href="{{ section.settings.nav_link_4_url | default: '#contact' }}">{{ section.settings.nav_link_4_text }}</a></li>
+            {% endif %}
+        </ul>
+        <button class="mobile-nav-toggle" aria-label="Toggle mobile navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+</nav>
+
+<section class="hero" id="hero-section">
+    <div class="hero-content">
+        {% if section.settings.hero_badge_text != blank %}
+            <div class="hero-badge">{{ section.settings.hero_badge_text }}</div>
+        {% endif %}
+        
+        {% if section.settings.hero_title != blank %}
+            <h1>{{ section.settings.hero_title }}</h1>
+        {% else %}
+            <h1>Don't Compete.<br>Dominate.</h1>
+        {% endif %}
+        
+        {% if section.settings.hero_subtitle != blank %}
+            <p class="hero-subtitle">{{ section.settings.hero_subtitle }}</p>
+        {% endif %}
+        
+        <div class="cta-container">
+            {% if section.settings.primary_cta_text != blank %}
+                <a href="{{ section.settings.primary_cta_url | default: '#products' }}" class="cta-primary">
+                    {{ section.settings.primary_cta_text }}
+                </a>
+            {% endif %}
+            
+            {% if section.settings.secondary_cta_text != blank %}
+                <a href="{{ section.settings.secondary_cta_url | default: '#about' }}" class="cta-secondary">
+                    {{ section.settings.secondary_cta_text }}
+                </a>
+            {% endif %}
+        </div>
+        
+        {% if section.settings.show_scroll_indicator %}
+            <div class="scroll-indicator">
+                <div class="scroll-arrow">↓</div>
+                <span>{{ section.settings.scroll_text | default: "Scroll to Conquer" }}</span>
+            </div>
+        {% endif %}
+    </div>
+    
+    {% if section.settings.hero_video_url != blank %}
+        <div class="hero-video-background">
+            <video autoplay muted loop playsinline>
+                <source src="{{ section.settings.hero_video_url }}" type="video/mp4">
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+    {% endif %}
+    
+    {% if section.settings.show_floating_elements %}
+        <div class="floating-elements">
+            <div class="floating-element element-1">👑</div>
+            <div class="floating-element element-2">⚡</div>
+            <div class="floating-element element-3">🏆</div>
+            <div class="floating-element element-4">💎</div>
+        </div>
+    {% endif %}
+</section>
+
+<style>
+/* Hero-specific styles */
+.hero {
+    height: {{ section.settings.hero_height | default: 100 }}vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    {% if section.settings.hero_background_color != blank %}
+        background-color: {{ section.settings.hero_background_color }};
+    {% endif %}
+}
+
+{% if section.settings.hero_background_image != blank %}
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('{{ section.settings.hero_background_image | img_url: '1920x1080' }}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: {{ section.settings.background_image_opacity | default: 0.3 }};
+    z-index: -1;
+}
+{% endif %}
+
+.hero-content {
+    max-width: 1000px;
+    padding: 0 20px;
+    z-index: 2;
+    {% if section.settings.content_alignment == 'left' %}
+        text-align: left;
+        margin-left: 0;
+        margin-right: auto;
+    {% elsif section.settings.content_alignment == 'right' %}
+        text-align: right;
+        margin-left: auto;
+        margin-right: 0;
+    {% else %}
+        text-align: center;
+        margin: 0 auto;
+    {% endif %}
+}
+
+.hero-badge {
+    {% if section.settings.badge_color != blank %}
+        color: {{ section.settings.badge_color }};
+        border-color: {{ section.settings.badge_color }};
+    {% endif %}
+    {% if section.settings.badge_background != blank %}
+        background: {{ section.settings.badge_background }};
+    {% endif %}
+}
+
+.hero h1 {
+    {% if section.settings.title_color != blank %}
+        color: {{ section.settings.title_color }};
+    {% endif %}
+    {% if section.settings.title_size != blank %}
+        font-size: {{ section.settings.title_size }}px;
+    {% endif %}
+    {% if section.settings.title_font_weight != blank %}
+        font-weight: {{ section.settings.title_font_weight }};
+    {% endif %}
+}
+
+.hero-subtitle {
+    {% if section.settings.subtitle_color != blank %}
+        color: {{ section.settings.subtitle_color }};
+    {% endif %}
+    {% if section.settings.subtitle_size != blank %}
+        font-size: {{ section.settings.subtitle_size }}px;
+    {% endif %}
+}
+
+.cta-primary {
+    {% if section.settings.primary_cta_bg != blank %}
+        background: {{ section.settings.primary_cta_bg }};
+    {% endif %}
+    {% if section.settings.primary_cta_color != blank %}
+        color: {{ section.settings.primary_cta_color }};
+    {% endif %}
+}
+
+.cta-secondary {
+    {% if section.settings.secondary_cta_bg != blank %}
+        background: {{ section.settings.secondary_cta_bg }};
+    {% endif %}
+    {% if section.settings.secondary_cta_color != blank %}
+        color: {{ section.settings.secondary_cta_color }};
+    {% endif %}
+    {% if section.settings.secondary_cta_border != blank %}
+        border-color: {{ section.settings.secondary_cta_border }};
+    {% endif %}
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: #FFD700;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+.scroll-arrow {
+    font-size: 2em;
+    margin-bottom: 5px;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Video Background */
+.hero-video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.hero-video-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, {{ section.settings.video_overlay_opacity | default: 0.5 }});
+}
+
+/* Floating Elements */
+.floating-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.floating-element {
+    position: absolute;
+    font-size: 2em;
+    opacity: 0.6;
+    animation: float 6s ease-in-out infinite;
+}
+
+.element-1 {
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.element-2 {
+    top: 30%;
+    right: 15%;
+    animation-delay: 1.5s;
+}
+
+.element-3 {
+    bottom: 25%;
+    left: 20%;
+    animation-delay: 3s;
+}
+
+.element-4 {
+    bottom: 35%;
+    right: 10%;
+    animation-delay: 4.5s;
+}
+
+@keyframes float {
+    0%, 100% { 
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.3;
+    }
+    50% { 
+        transform: translateY(-20px) rotate(10deg);
+        opacity: 0.8;
+    }
+}
+
+/* Mobile Navigation */
+.mobile-nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.mobile-nav-toggle span {
+    width: 25px;
+    height: 3px;
+    background: #FFD700;
+    transition: all 0.3s ease;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.95);
+        flex-direction: column;
+        padding: 20px;
+        gap: 10px;
+    }
+    
+    .nav-links.active {
+        display: flex;
+    }
+    
+    .mobile-nav-toggle {
+        display: flex;
+    }
+    
+    .hero {
+        height: {{ section.settings.mobile_hero_height | default: 80 }}vh;
+    }
+    
+    .hero h1 {
+        font-size: {{ section.settings.mobile_title_size | default: 2.5 }}em;
+    }
+    
+    .hero-subtitle {
+        font-size: {{ section.settings.mobile_subtitle_size | default: 1.2 }}em;
+    }
+    
+    .cta-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .cta-primary, .cta-secondary {
+        width: 100%;
+        max-width: 300px;
+        padding: 15px 30px;
+        font-size: 1.1em;
+    }
+    
+    .floating-elements {
+        display: none;
+    }
+}
+</style>
+
+<script>
+// Mobile navigation toggle
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileToggle = document.querySelector('.mobile-nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (mobileToggle && navLinks) {
+        mobileToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+        });
+    }
+    
+    // Nav scroll effect
+    window.addEventListener('scroll', function() {
+        const nav = document.querySelector('.nav');
+        if (nav) {
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(0, 0, 0, 0.95)';
+            } else {
+                nav.style.background = 'rgba(0, 0, 0, 0.9)';
+            }
+        }
+    });
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+    
+    // Close mobile nav when clicking links
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', function() {
+            navLinks.classList.remove('active');
+        });
+    });
+});
+</script>
+
+{% schema %}
+{
+  "name": "Empire Hero",
+  "tag": "section",
+  "class": "empire-hero-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Navigation Settings"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo Text",
+      "default": "Empire Domination"
+    },
+    {
+      "type": "text",
+      "id": "nav_link_1_text",
+      "label": "Navigation Link 1 Text",
+      "default": "Arsenal"
+    },
+    {
+      "type": "url",
+      "id": "nav_link_1_url",
+      "label": "Navigation Link 1 URL",
+      "default": "#products"
+    },
+    {
+      "type": "text",
+      "id": "nav_link_2_text",
+      "label": "Navigation Link 2 Text",
+      "default": "Empire"
+    },
+    {
+      "type": "url",
+      "id": "nav_link_2_url",
+      "label": "Navigation Link 2 URL",
+      "default": "#about"
+    },
+    {
+      "type": "text",
+      "id": "nav_link_3_text",
+      "label": "Navigation Link 3 Text",
+      "default": "Victories"
+    },
+    {
+      "type": "url",
+      "id": "nav_link_3_url",
+      "label": "Navigation Link 3 URL",
+      "default": "#testimonials"
+    },
+    {
+      "type": "text",
+      "id": "nav_link_4_text",
+      "label": "Navigation Link 4 Text",
+      "default": "Conquer"
+    },
+    {
+      "type": "url",
+      "id": "nav_link_4_url",
+      "label": "Navigation Link 4 URL",
+      "default": "#contact"
+    },
+    {
+      "type": "header",
+      "content": "Hero Content"
+    },
+    {
+      "type": "text",
+      "id": "hero_badge_text",
+      "label": "Hero Badge Text",
+      "default": "For Executives Who Refuse to Compete"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_title",
+      "label": "Hero Title",
+      "default": "Don't Compete.<br>Dominate."
+    },
+    {
+      "type": "textarea",
+      "id": "hero_subtitle",
+      "label": "Hero Subtitle",
+      "default": "Premium templates, strategies, and solutions for market leaders who think beyond competition."
+    },
+    {
+      "type": "text",
+      "id": "primary_cta_text",
+      "label": "Primary CTA Text",
+      "default": "Build Your Empire"
+    },
+    {
+      "type": "url",
+      "id": "primary_cta_url",
+      "label": "Primary CTA URL",
+      "default": "#products"
+    },
+    {
+      "type": "text",
+      "id": "secondary_cta_text",
+      "label": "Secondary CTA Text",
+      "default": "Discover Domination"
+    },
+    {
+      "type": "url",
+      "id": "secondary_cta_url",
+      "label": "Secondary CTA URL",
+      "default": "#about"
+    },
+    {
+      "type": "header",
+      "content": "Visual Settings"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Content Alignment",
+      "options": [
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "hero_height",
+      "min": 60,
+      "max": 120,
+      "step": 5,
+      "unit": "vh",
+      "label": "Hero Height (Desktop)",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "mobile_hero_height",
+      "min": 60,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "label": "Hero Height (Mobile)",
+      "default": 80
+    },
+    {
+      "type": "color",
+      "id": "hero_background_color",
+      "label": "Background Color"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "range",
+      "id": "background_image_opacity",
+      "min": 0.1,
+      "max": 1,
+      "step": 0.1,
+      "label": "Background Image Opacity",
+      "default": 0.3
+    },
+    {
+      "type": "text",
+      "id": "hero_video_url",
+      "label": "Background Video URL (MP4)",
+      "info": "Optional background video"
+    },
+    {
+      "type": "range",
+      "id": "video_overlay_opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "label": "Video Overlay Opacity",
+      "default": 0.5
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 24,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Title Size (Desktop)",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "mobile_title_size",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "unit": "em",
+      "label": "Title Size (Mobile)",
+      "default": 2.5
+    },
+    {
+      "type": "select",
+      "id": "title_font_weight",
+      "label": "Title Font Weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "600",
+          "label": "Semi Bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        },
+        {
+          "value": "900",
+          "label": "Black"
+        }
+      ],
+      "default": "900"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle Color"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "min": 14,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Subtitle Size (Desktop)",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "mobile_subtitle_size",
+      "min": 1,
+      "max": 2,
+      "step": 0.1,
+      "unit": "em",
+      "label": "Subtitle Size (Mobile)",
+      "default": 1.2
+    },
+    {
+      "type": "header",
+      "content": "Badge Settings"
+    },
+    {
+      "type": "color",
+      "id": "badge_color",
+      "label": "Badge Text Color"
+    },
+    {
+      "type": "text",
+      "id": "badge_background",
+      "label": "Badge Background",
+      "info": "CSS gradient or color"
+    },
+    {
+      "type": "header",
+      "content": "CTA Button Colors"
+    },
+    {
+      "type": "text",
+      "id": "primary_cta_bg",
+      "label": "Primary CTA Background",
+      "info": "CSS gradient or color"
+    },
+    {
+      "type": "color",
+      "id": "primary_cta_color",
+      "label": "Primary CTA Text Color"
+    },
+    {
+      "type": "text",
+      "id": "secondary_cta_bg",
+      "label": "Secondary CTA Background",
+      "info": "CSS gradient or color"
+    },
+    {
+      "type": "color",
+      "id": "secondary_cta_color",
+      "label": "Secondary CTA Text Color"
+    },
+    {
+      "type": "color",
+      "id": "secondary_cta_border",
+      "label": "Secondary CTA Border Color"
+    },
+    {
+      "type": "header",
+      "content": "Additional Features"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_scroll_indicator",
+      "label": "Show Scroll Indicator",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "scroll_text",
+      "label": "Scroll Indicator Text",
+      "default": "Scroll to Conquer"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_floating_elements",
+      "label": "Show Floating Elements",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Empire Hero"
+    }
+  ]
+}
+{% endschema %}

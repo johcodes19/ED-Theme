@@ -1,0 +1,73 @@
+{% comment %}
+=== snippets/empire-button.liquid ===
+Consistent button styling throughout the theme
+Usage: {% render 'empire-button', text: "Dominate Now", style: "primary", size: "large" %}
+{% endcomment %}
+
+{% assign button_classes = 'empire-btn' %}
+
+{% case style %}
+  {% when 'primary' %}
+    {% assign button_classes = button_classes | append: ' btn-primary' %}
+  {% when 'secondary' %}
+    {% assign button_classes = button_classes | append: ' btn-secondary' %}
+  {% when 'outline' %}
+    {% assign button_classes = button_classes | append: ' btn-outline' %}
+  {% when 'ghost' %}
+    {% assign button_classes = button_classes | append: ' btn-ghost' %}
+  {% when 'danger' %}
+    {% assign button_classes = button_classes | append: ' btn-danger' %}
+  {% else %}
+    {% assign button_classes = button_classes | append: ' btn-primary' %}
+{% endcase %}
+
+{% case size %}
+  {% when 'small' %}
+    {% assign button_classes = button_classes | append: ' btn-small' %}
+  {% when 'large' %}
+    {% assign button_classes = button_classes | append: ' btn-large' %}
+  {% when 'xl' %}
+    {% assign button_classes = button_classes | append: ' btn-xl' %}
+  {% else %}
+    {% assign button_classes = button_classes | append: ' btn-medium' %}
+{% endcase %}
+
+{% if full_width %}
+  {% assign button_classes = button_classes | append: ' btn-full-width' %}
+{% endif %}
+
+{% if disabled %}
+  {% assign button_classes = button_classes | append: ' btn-disabled' %}
+{% endif %}
+
+{% if class %}
+  {% assign button_classes = button_classes | append: ' ' | append: class %}
+{% endif %}
+
+{% if url %}
+  <a href="{{ url }}" class="{{ button_classes }}" {% if target %}target="{{ target }}"{% endif %} {% if disabled %}aria-disabled="true"{% endif %}>
+{% elsif onclick %}
+  <button type="{{ button_type | default: 'button' }}" class="{{ button_classes }}" onclick="{{ onclick }}" {% if disabled %}disabled{% endif %}>
+{% else %}
+  <button type="{{ button_type | default: 'button' }}" class="{{ button_classes }}" {% if disabled %}disabled{% endif %}>
+{% endif %}
+
+    {% if icon_before %}
+      {% render 'empire-icon', icon: icon_before, size: 'small' %}
+    {% endif %}
+    
+    <span class="btn-text">{{ text | default: "Dominate" }}</span>
+    
+    {% if icon_after %}
+      {% render 'empire-icon', icon: icon_after, size: 'small' %}
+    {% endif %}
+    
+    {% if loading %}
+      <span class="btn-loading">{% render 'empire-loading-spinner', size: 'small' %}</span>
+    {% endif %}
+
+{% if url %}
+  </a>
+{% else %}
+  </button>
+{% endif %}

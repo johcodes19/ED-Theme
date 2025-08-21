@@ -1,0 +1,38 @@
+{% comment %}
+=== snippets/empire-testimonial.liquid ===
+Reusable testimonial component
+Usage: {% render 'empire-testimonial', testimonial_text: "...", author: "...", title: "..." %}
+{% endcomment %}
+
+<div class="testimonial-card fade-in">
+    {% if rating %}
+        <div class="testimonial-rating">
+            {% for i in (1..rating) %}
+                ⭐
+            {% endfor %}
+        </div>
+    {% endif %}
+    
+    <p class="testimonial-text">"{{ testimonial_text }}"</p>
+    
+    <div class="testimonial-author">
+        {% if author_image %}
+            <img src="{{ author_image | img_url: '60x60' }}" 
+                 alt="{{ author }}" 
+                 class="author-avatar">
+        {% endif %}
+        
+        <div class="author-info">
+            <strong class="author-name">{{ author }}</strong>
+            {% if author_title %}
+                <span class="author-title">{{ author_title }}</span>
+            {% endif %}
+        </div>
+    </div>
+    
+    {% if show_verification %}
+        <div class="testimonial-verification">
+            <span class="verification-badge">✓ Verified Purchase</span>
+        </div>
+    {% endif %}
+</div>

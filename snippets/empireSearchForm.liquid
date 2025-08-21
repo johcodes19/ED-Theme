@@ -1,0 +1,40 @@
+{% comment %}
+=== snippets/empire-search-form.liquid ===
+Reusable search form
+Usage: {% render 'empire-search-form', placeholder: "Search empire..." %}
+{% endcomment %}
+
+<form action="{{ routes.search_url }}" method="get" class="empire-search-form" role="search">
+    <div class="search-input-wrapper">
+        <input type="search"
+               name="q"
+               value="{{ search.terms | escape }}"
+               placeholder="{{ placeholder | default: 'Search your empire...' }}"
+               class="search-input"
+               autocomplete="off"
+               autocorrect="off"
+               autocapitalize="off"
+               spellcheck="false">
+        
+        <button type="submit" class="search-submit" aria-label="Search">
+            🔍
+        </button>
+    </div>
+    
+    {% if show_filters %}
+        <div class="search-filters">
+            <label>
+                <input type="checkbox" name="type" value="product" {% if search.types contains 'product' %}checked{% endif %}>
+                Products
+            </label>
+            <label>
+                <input type="checkbox" name="type" value="page" {% if search.types contains 'page' %}checked{% endif %}>
+                Pages
+            </label>
+            <label>
+                <input type="checkbox" name="type" value="article" {% if search.types contains 'article' %}checked{% endif %}>
+                Articles
+            </label>
+        </div>
+    {% endif %}
+</form>

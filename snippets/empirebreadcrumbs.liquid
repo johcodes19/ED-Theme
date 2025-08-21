@@ -1,0 +1,56 @@
+{% comment %}
+=== snippets/empire-breadcrumbs.liquid ===
+Breadcrumb navigation
+Usage: {% render 'empire-breadcrumbs' %}
+{% endcomment %}
+
+<nav class="empire-breadcrumbs" aria-label="Breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="{{ routes.root_url }}" class="breadcrumb-link">
+                {% render 'empire-icon', icon: 'crown', size: 'small' %}
+                Empire
+            </a>
+        </li>
+        
+        {% case template %}
+        {% when 'collection' %}
+            <li class="breadcrumb-item active">
+                <span class="breadcrumb-current">{{ collection.title }}</span>
+            </li>
+        
+        {% when 'product' %}
+            {% if collection %}
+                <li class="breadcrumb-item">
+                    <a href="{{ collection.url }}" class="breadcrumb-link">{{ collection.title }}</a>
+                </li>
+            {% endif %}
+            <li class="breadcrumb-item active">
+                <span class="breadcrumb-current">{{ product.title }}</span>
+            </li>
+        
+        {% when 'page' %}
+            <li class="breadcrumb-item active">
+                <span class="breadcrumb-current">{{ page.title }}</span>
+            </li>
+        
+        {% when 'blog' %}
+            <li class="breadcrumb-item active">
+                <span class="breadcrumb-current">{{ blog.title }}</span>
+            </li>
+        
+        {% when 'article' %}
+            <li class="breadcrumb-item">
+                <a href="{{ blog.url }}" class="breadcrumb-link">{{ blog.title }}</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <span class="breadcrumb-current">{{ article.title }}</span>
+            </li>
+        
+        {% when 'search' %}
+            <li class="breadcrumb-item active">
+                <span class="breadcrumb-current">Search{% if search.terms %}: "{{ search.terms }}"{% endif %}</span>
+            </li>
+        {% endcase %}
+    </ol>
+</nav>

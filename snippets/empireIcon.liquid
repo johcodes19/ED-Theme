@@ -1,0 +1,56 @@
+{% comment %}
+=== snippets/empire-icon.liquid ===
+Centralized icon management
+Usage: {% render 'empire-icon', icon: 'crown', size: 'large' %}
+{% endcomment %}
+
+{% assign icon_size_class = '' %}
+{% case size %}
+  {% when 'small' %}
+    {% assign icon_size_class = 'icon-small' %}
+  {% when 'large' %}
+    {% assign icon_size_class = 'icon-large' %}
+  {% when 'xl' %}
+    {% assign icon_size_class = 'icon-xl' %}
+  {% else %}
+    {% assign icon_size_class = 'icon-medium' %}
+{% endcase %}
+
+<span class="empire-icon {{ icon_size_class }} {% if class %}{{ class }}{% endif %}">
+  {% case icon %}
+    {% when 'crown' %}
+      👑
+    {% when 'lightning' %}
+      ⚡
+    {% when 'trophy' %}
+      🏆
+    {% when 'diamond' %}
+      💎
+    {% when 'rocket' %}
+      🚀
+    {% when 'target' %}
+      🎯
+    {% when 'shield' %}
+      🛡️
+    {% when 'sword' %}
+      ⚔️
+    {% when 'fire' %}
+      🔥
+    {% when 'star' %}
+      ⭐
+    {% when 'check' %}
+      ✅
+    {% when 'close' %}
+      ❌
+    {% when 'arrow-right' %}
+      →
+    {% when 'arrow-left' %}
+      ←
+    {% when 'arrow-up' %}
+      ↑
+    {% when 'arrow-down' %}
+      ↓
+    {% else %}
+      {{ icon | default: '🏆' }}
+  {% endcase %}
+</span>

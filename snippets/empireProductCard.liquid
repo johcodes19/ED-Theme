@@ -1,0 +1,76 @@
+{% comment %}
+=== snippets/empire-product-card.liquid ===
+Reusable product card component for Empire Domination theme
+Usage: {% render 'empire-product-card', product: product, show_features: true %}
+{% endcomment %}
+
+<div class="product-card fade-in" data-product-id="{{ product.id }}">
+    <div class="product-icon">
+        {% if product.metafields.custom.icon %}
+            {{ product.metafields.custom.icon }}
+        {% else %}
+            🏆
+        {% endif %}
+    </div>
+    
+    {% if product.featured_image %}
+        <div class="product-image">
+            <img src="{{ product.featured_image | img_url: '300x300' }}" 
+                 alt="{{ product.featured_image.alt | escape }}" 
+                 loading="lazy">
+        </div>
+    {% endif %}
+    
+    <h3 class="product-title">{{ product.title }}</h3>
+    
+    <p class="product-description">
+        {{ product.description | strip_html | truncate: 150 }}
+    </p>
+    
+    {% if show_features and product.metafields.custom.features %}
+        <ul class="product-features">
+            {% assign features = product.metafields.custom.features | split: ',' %}
+            {% for feature in features limit: 5 %}
+                <li>{{ feature | strip }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    
+    <div class="product-pricing">
+        <div class="product-price">
+            {% if product.compare_at_price > product.price %}
+                <span class="price-sale">{{ product.price | money }}</span>
+                <span class="price-compare">{{ product.compare_at_price | money }}</span>
+                <span class="price-save">Save {{ product.compare_at_price | minus: product.price | money }}</span>
+            {% else %}
+                <span class="price">{{ product.price | money }}</span>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="product-actions">
+        <a href="{{ product.url }}" class="product-btn">
+            {% if button_text %}
+                {{ button_text }}
+            {% else %}
+                Dominate Now
+            {% endif %}
+        </a>
+        
+        {% if show_quick_view %}
+            <button class="quick-view-btn" data-product-url="{{ product.url }}.js">
+                Quick View
+            </button>
+        {% endif %}
+    </div>
+    
+    {% if product.tags contains 'bestseller' or product.tags contains 'featured' %}
+        <div class="product-badge">
+            {% if product.tags contains 'bestseller' %}
+                <span class="badge-bestseller">👑 Bestseller</span>
+            {% elsif product.tags contains 'featured' %}
+                <span class="badge-featured">⭐ Featured</span>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>

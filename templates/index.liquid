@@ -1,0 +1,291 @@
+{% comment %}
+templates/index.liquid - Actualizado para usar snippets
+Versión mejorada con componentes reutilizables
+{% endcomment %}
+
+<div class="background-animation"></div>
+
+<nav class="nav">
+    <div class="nav-container">
+        <div class="logo">{{ shop.name | default: "Empire Domination" }}</div>
+        <ul class="nav-links">
+            <li><a href="#products">Arsenal</a></li>
+            <li><a href="#about">Empire</a></li>
+            <li><a href="#testimonials">Victories</a></li>
+            <li><a href="#contact">Conquer</a></li>
+        </ul>
+    </div>
+</nav>
+
+{% comment %}
+SECCIÓN HERO - Usando la sección empire-hero que creamos
+Esto reemplaza la sección hero duplicada que tenías
+{% endcomment %}
+{% section 'empire-hero' %}
+
+{% comment %}
+SECCIÓN DE PRODUCTOS - Actualizada para usar snippets
+{% endcomment %}
+<section class="products" id="products">
+    <div class="container">
+        <div class="section-header fade-in">
+            <h2 class="section-title">{{ settings.products_title | default: "Domination Arsenal" }}</h2>
+            <p class="section-subtitle">{{ settings.products_subtitle | default: "Exclusive tools and templates designed for those who lead, not follow. Each product is crafted to give you the unfair advantage you deserve." }}</p>
+        </div>
+
+        <div class="products-grid">
+            {% comment %}
+            PRODUCTOS DINÁMICOS - Usando el snippet empire-product-card
+            {% endcomment %}
+            {% for product in collections.featured.products limit: 6 %}
+                {% render 'empire-product-card', 
+                   product: product, 
+                   show_features: true, 
+                   button_text: settings.product_cta_text | default: "Dominate Now",
+                   show_quick_view: false %}
+            {% else %}
+                {% comment %}
+                PRODUCTOS ESTÁTICOS - Para cuando no hay productos en "featured"
+                Usando snippets para mantener consistencia
+                {% endcomment %}
+                
+                {% comment %} Producto 1: AI Course Empire {% endcomment %}
+                <div class="product-card fade-in">
+                    <div class="product-icon">
+                        {% render 'empire-icon', icon: 'rocket', size: 'large' %}
+                    </div>
+                    <h3 class="product-title">AI Course Empire</h3>
+                    <p class="product-description">147 premium templates to dominate the AI education market. Everything from course outlines to marketing materials.</p>
+                    <ul class="product-features">
+                        <li>{% render 'empire-icon', icon: 'crown', size: 'small' %} 147 Professional Templates</li>
+                        <li>{% render 'empire-icon', icon: 'crown', size: 'small' %} Course Creation Framework</li>
+                        <li>{% render 'empire-icon', icon: 'crown', size: 'small' %} Marketing Materials</li>
+                        <li>{% render 'empire-icon', icon: 'crown', size: 'small' %} Sales Page Templates</li>
+                        <li>{% render 'empire-icon', icon: 'crown', size: 'small' %} Student Engagement Tools</li>
+                    </ul>
+                    {% render 'empire-price-display', 
+                       price: 497, 
+                       currency: 'USD',
+                       class: 'product-price-large' %}
+                    {% render 'empire-button', 
+                       text: "Dominate AI Education", 
+                       style: "primary", 
+                       size: "medium",
+                       url: "#",
+                       class: "product-btn" %}
+                </div>
+                
+                {% comment %} Producto 2: Executive Domination Kit {% endcomment %}
+                <div class="product-card fade-in">
+                    <div class="product-icon">
+                        {% render 'empire-icon', icon: 'lightning', size: 'large' %}
+                    </div>
+                    <h3 class="product-title">Executive Domination Kit</h3>
+                    <p class="product-description">Complete suite of executive tools, frameworks, and templates for C-suite domination.</p>
+                    <ul class="product-features">
+                        <li>{% render 'empire-icon', icon: 'crown', size: 'small' %} Leadership Frameworks</li>
+                        <li>{% render 'empire-icon', icon: 'crown', size: 'small' %} Strategic Planning Templates</li>
+                        <li>{% render 'empire-icon', icon: 'crown', size: 'small' %} Executive Presentation Decks</li>
+                        <li>{% render 'empire-icon', icon: 'crown', size: 'small' %} Crisis Management Playbook</li>
+                        <li>{% render 'empire-icon', icon: 'crown', size: 'small' %} Board Communication Tools</li>
+                    </ul>
+                    {% render 'empire-price-display', 
+                       price: 997, 
+                       currency: 'USD',
+                       class: 'product-price-large' %}
+                    {% render 'empire-button', 
+                       text: "Command Respect", 
+                       style: "primary", 
+                       size: "medium",
+                       url: "#",
+                       class: "product-btn" %}
+                </div>
+                
+                {% comment %} Producto 3: Market Domination Blueprint {% endcomment %}
+                <div class="product-card fade-in">
+                    <div class="product-icon">
+                        {% render 'empire-icon', icon: 'trophy', size: 'large' %}
+                    </div>
+                    <h3 class="product-title">Market Domination Blueprint</h3>
+                    <p class="product-description">Strategic frameworks and implementation guides for achieving market leadership in any industry.</p>
+                    <ul class="product-features">
+                        <li>{% render 'empire-icon', icon: 'crown', size: 'small' %} Market Analysis Templates</li>
+                        <li>{% render 'empire-icon', icon: 'crown', size: 'small' %} Competitive Strategy Framework</li>
+                        <li>{% render 'empire-icon', icon: 'crown', size: 'small' %} Brand Positioning Guide</li>
+                        <li>{% render 'empire-icon', icon: 'crown', size: 'small' %} Growth Hacking Playbook</li>
+                        <li>{% render 'empire-icon', icon: 'crown', size: 'small' %} Performance Metrics Dashboard</li>
+                    </ul>
+                    {% render 'empire-price-display', 
+                       price: 1497, 
+                       currency: 'USD',
+                       class: 'product-price-large' %}
+                    {% render 'empire-button', 
+                       text: "Conquer Markets", 
+                       style: "primary", 
+                       size: "medium",
+                       url: "#",
+                       class: "product-btn" %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% comment %}
+SECCIÓN DE ESTADÍSTICAS - Mejorada con íconos dinámicos
+{% endcomment %}
+<section class="stats">
+    <div class="container">
+        <div class="stats-grid fade-in">
+            <div class="stat-item">
+                <span class="stat-number">{{ settings.stat_1_number | default: "147+" }}</span>
+                <span class="stat-label">
+                    {% render 'empire-icon', icon: 'crown', size: 'small' %}
+                    {{ settings.stat_1_label | default: "Premium Templates" }}
+                </span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">{{ settings.stat_2_number | default: "98%" }}</span>
+                <span class="stat-label">
+                    {% render 'empire-icon', icon: 'trophy', size: 'small' %}
+                    {{ settings.stat_2_label | default: "Client Success Rate" }}
+                </span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">{{ settings.stat_3_number | default: "50+" }}</span>
+                <span class="stat-label">
+                    {% render 'empire-icon', icon: 'target', size: 'small' %}
+                    {{ settings.stat_3_label | default: "Industries Dominated" }}
+                </span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">{{ settings.stat_4_number | default: "24/7" }}</span>
+                <span class="stat-label">
+                    {% render 'empire-icon', icon: 'shield', size: 'small' %}
+                    {{ settings.stat_4_label | default: "Empire Support" }}
+                </span>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% comment %}
+SECCIÓN DE TESTIMONIOS - Usando el snippet empire-testimonial
+{% endcomment %}
+<section class="testimonials" id="testimonials">
+    <div class="container">
+        <div class="section-header fade-in">
+            <h2 class="section-title">{{ settings.testimonials_title | default: "Victory Stories" }}</h2>
+            <p class="section-subtitle">{{ settings.testimonials_subtitle | default: "From our empire builders who chose domination over competition" }}</p>
+        </div>
+        
+        {% comment %}
+        TESTIMONIAL PRINCIPAL - Usando snippet
+        {% endcomment %}
+        {% render 'empire-testimonial',
+           testimonial_text: settings.testimonial_1_text | default: "Empire Domination didn't just give me templates - they gave me a new way of thinking. I went from competing for scraps to owning my entire market segment.",
+           author: settings.testimonial_1_author | default: "Sarah K., CEO Tech Startup",
+           rating: 5,
+           show_verification: true %}
+        
+        {% comment %}
+        TESTIMONIALES ADICIONALES - Si existen en settings
+        {% endcomment %}
+        {% if settings.testimonial_2_text != blank %}
+            {% render 'empire-testimonial',
+               testimonial_text: settings.testimonial_2_text,
+               author: settings.testimonial_2_author,
+               rating: 5,
+               show_verification: true %}
+        {% endif %}
+        
+        {% if settings.testimonial_3_text != blank %}
+            {% render 'empire-testimonial',
+               testimonial_text: settings.testimonial_3_text,
+               author: settings.testimonial_3_author,
+               rating: 5,
+               show_verification: true %}
+        {% endif %}
+    </div>
+</section>
+
+{% comment %}
+FOOTER - Mejorado con íconos dinámicos
+{% endcomment %}
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-logo">{{ shop.name | default: "Empire Domination" }}</div>
+            <p class="footer-tagline">{{ settings.footer_tagline | default: "For those who lead, not follow." }}</p>
+            
+            {% comment %}
+            ENLACES SOCIALES - Mejorados con íconos consistentes
+            {% endcomment %}
+            <div class="social-links">
+                {% if settings.social_twitter_link != blank %}
+                    <a href="{{ settings.social_twitter_link }}" aria-label="Twitter">
+                        {% render 'empire-icon', icon: 'twitter', size: 'medium' %}
+                    </a>
+                {% endif %}
+                {% if settings.social_linkedin_link != blank %}
+                    <a href="{{ settings.social_linkedin_link }}" aria-label="LinkedIn">
+                        {% render 'empire-icon', icon: 'linkedin', size: 'medium' %}
+                    </a>
+                {% endif %}
+                {% if settings.social_email_link != blank %}
+                    <a href="mailto:{{ settings.social_email_link }}" aria-label="Email">
+                        {% render 'empire-icon', icon: 'email', size: 'medium' %}
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; {{ 'now' | date: "%Y" }} {{ shop.name }}. All rights reserved. | {{ settings.footer_slogan | default: "Don't Compete. Dominate." }}</p>
+        </div>
+    </div>
+</footer>
+
+{% comment %}
+SCRIPT PARA FUNCIONALIDAD MEJORADA
+{% endcomment %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar animaciones de scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    // Aplicar a elementos con clase fade-in
+    document.querySelectorAll('.fade-in').forEach(el => {
+        observer.observe(el);
+    });
+    
+    // Tracking mejorado para productos
+    document.querySelectorAll('.product-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            const productCard = this.closest('.product-card');
+            const productTitle = productCard.querySelector('.product-title').textContent;
+            
+            // Analytics tracking (opcional)
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'product_interest', {
+                    'product_name': productTitle,
+                    'event_category': 'engagement'
+                });
+            }
+            
+            console.log('Product Interest:', productTitle);
+        });
+    });
+});
+</script>

@@ -1,0 +1,42 @@
+{% comment %}
+=== snippets/empire-price-display.liquid ===
+Consistent price formatting across the theme
+Usage: {% render 'empire-price-display', product: product, variant: variant %}
+{% endcomment %}
+
+{% assign current_variant = variant | default: product.selected_or_first_available_variant %}
+
+<div class="empire-price-display {% if class %}{{ class }}{% endif %}">
+    {% if current_variant.compare_at_price > current_variant.price %}
+        <div class="price-sale-container">
+            <span class="price-current price-sale">{{ current_variant.price | money }}</span>
+            <span class="price-compare">{{ current_variant.compare_at_price | money }}</span>
+            
+            {% assign savings = current_variant.compare_at_price | minus: current_variant.price %}
+            {% assign savings_percent = savings | times: 100.0 | divided_by: current_variant.compare_at_price | round %}
+            
+            <div class="price-savings">
+                <span class="savings-amount">Save {{ savings | money }}</span>
+                <span class="savings-percent">({{ savings_percent }}% off)</span>
+            </div>
+        </div>
+    {% else %}
+        <span class="price-current">{{ current_variant.price | money }}</span>
+    {% endif %}
+    
+    {% if show_unit_price and current_variant.unit_price %}
+        <div class="price-unit">
+            {{ current_variant.unit_price | money }}/
+            {% if current_variant.unit_price_measurement.reference_value != 1 %}
+                {{ current_variant.unit_price_measurement.reference_value }}
+            {% endif %}
+            {{ current_variant.unit_price_measurement.reference_unit }}
+        </div>
+    {% endif %}
+    
+    {% if show_tax_info %}
+        <div class="price-tax-info">
+            {{ 'products.general.tax_included' | t }}
+        </div>
+    {% endif %}
+</div>

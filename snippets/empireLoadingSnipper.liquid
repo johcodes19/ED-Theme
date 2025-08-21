@@ -1,0 +1,50 @@
+{% comment %}
+=== snippets/empire-loading-spinner.liquid ===
+Loading animation for AJAX requests
+Usage: {% render 'empire-loading-spinner', size: 'medium' %}
+{% endcomment %}
+
+<div class="empire-loading-spinner {% if size %}spinner-{{ size }}{% else %}spinner-medium{% endif %} {% if class %}{{ class }}{% endif %}">
+    <div class="spinner-crown">👑</div>
+    <div class="spinner-text">
+        {{ loading_text | default: "Building Empire..." }}
+    </div>
+</div>
+
+<style>
+.empire-loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px;
+}
+
+.spinner-crown {
+    font-size: 2em;
+    animation: spin-glow 1.5s ease-in-out infinite;
+}
+
+.spinner-text {
+    color: #FFD700;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.spinner-small .spinner-crown { font-size: 1.5em; }
+.spinner-large .spinner-crown { font-size: 3em; }
+.spinner-xl .spinner-crown { font-size: 4em; }
+
+@keyframes spin-glow {
+    0%, 100% { 
+        transform: rotate(0deg) scale(1);
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+    50% { 
+        transform: rotate(180deg) scale(1.1);
+        text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    }
+}
+</style>

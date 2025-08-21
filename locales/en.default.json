@@ -1,0 +1,62 @@
+{
+  "general": {
+    "404": {
+      "title": "Empire Not Found",
+      "subtext": "The page you're looking for doesn't exist in this empire."
+    },
+    "accessibility": {
+      "skip_to_content": "Skip to content"
+    },
+    "meta": {
+      "tags": "Tagged \"{{ tags }}\"",
+      "page": "Page {{ page }}"
+    },
+    "empire": {
+      "dominate_now": "Dominate Now",
+      "join_empire": "Join Empire",
+      "build_empire": "Build Your Empire"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to Empire",
+      "description": "Description",
+      "price": {
+        "regular_price": "Regular price",
+        "sale_price": "Sale price"
+      },
+      "sold_out": "Conquered",
+      "unavailable": "Unavailable",
+      "vendor": "Empire Vendor",
+      "quantity": "Quantity",
+      "sku": "SKU",
+      "product_type": "Product type",
+      "collections": "Collections"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Your Empire Cart",
+      "remove": "Remove",
+      "note": "Empire Instructions",
+      "subtotal": "Subtotal",
+      "shipping_policy_html": "<a href=\"{{ link }}\">Shipping policy</a>",
+      "checkout": "Conquer Checkout",
+      "empty": "Your empire cart is empty",
+      "continue_browsing_html": "Continue building your <a href=\"/collections/all\">empire</a>.",
+      "item_quantity": "Item quantity",
+      "increase_quantity": "Increase quantity for {{ product }}",
+      "decrease_quantity": "Decrease quantity for {{ product }}"
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone Number",
+      "message": "Message",
+      "send": "Send Empire Message",
+      "post_success": "Thanks for contacting the empire!"
+    }
+  }
+}

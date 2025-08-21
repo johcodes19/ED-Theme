@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}</title>
+  
+  {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+  
+  <link rel="canonical" href="{{ canonical_url }}">
+  
+  {% if template contains 'product' %}
+    <meta property="og:type" content="product">
+  {% else %}
+    <meta property="og:type" content="website">
+  {% endif %}
+  
+  <meta property="og:title" content="{{ page_title | escape }}">
+  
+  {% if page_image %}
+    <meta property="og:image" content="http:{{ page_image | img_url: '1200x630' }}">
+    <meta property="og:image:secure_url" content="https:{{ page_image | img_url: '1200x630' }}">
+  {% endif %}
+  
+  {{ 'empire-domination.css' | asset_url | stylesheet_tag }}
+  
+  {{ content_for_header }}
+  
+  <script>
+    window.theme = {
+      settings: {
+        cartType: {{ settings.cart_type | json }},
+        moneyFormat: {{ shop.money_format | json }},
+        saveType: {{ settings.save_type | json }},
+        productImageSize: {{ settings.product_image_size | json }},
+        productImageCover: {{ settings.product_image_cover }},
+        predictiveSearch: {{ settings.predictive_search_enabled }},
+        predictiveSearchType: {{ settings.predictive_search_type | json }},
+        quickView: {{ settings.quick_view | json }},
+        hotKeys: {{ settings.hot_keys }},
+        cartNotes: {{ settings.cart_notes_enable }},
+        animations: {{ settings.animations_enabled }},
+        isCustomer: {% if customer %}true{% else %}false{% endif %}
+      },
+      routes: {
+        root: '{{ routes.root_url }}',
+        account: '{{ routes.account_url }}',
+        collections: '{{ routes.collections_url }}',
+        all_products_collection: '{{ routes.all_products_collection_url }}',
+        search: '{{ routes.search_url }}',
+        cart: '{{ routes.cart_url }}'
+      },
+      strings: {
+        soldOut: {{ 'products.product.sold_out' | t | json }},
+        unavailable: {{ 'products.product.unavailable' | t | json }},
+        inStockLabel: {{ 'products.product.in_stock_label' | t | json }},
+        oneStockLabel: {{ 'products.product.stock_label.one' | t | json }},
+        otherStockLabel: {{ 'products.product.stock_label.other' | t | json }},
+        willNotShipUntil: {{ 'products.product.will_not_ship_until' | t | json }},
+        willBeInStockAfter: {{ 'products.product.will_be_in_stock_after' | t | json }},
+        waitingForStock: {{ 'products.product.waiting_for_stock' | t | json }},
+        savePrice: {{ 'products.general.save_html' | t | json }},
+        cartEmpty: {{ 'cart.general.empty' | t | json }},
+        cartTermsConfirmation: {{ 'cart.general.terms_confirm' | t | json }},
+        searchCollections: {{ 'general.search.collections' | t | json }},
+        searchPages: {{ 'general.search.pages' | t | json }},
+        searchArticles: {{ 'general.search.articles' | t | json }}
+      }
+    }
+  </script>
+
+  {%- if template.directory == 'customers' -%}
+    <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
+  {%- endif -%}
+
+</head>
+
+<body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if request.path == '/challenge' %} template-challange{% endif %}">
+
+  <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'accessibility.skip_to_content' | t }}</a>
+
+  {% sections 'header-group' %}
+
+  <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
+
+  {% sections 'footer-group' %}
+
+  <ul hidden>
+    <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
+    <li id="a11y-new-window-message">{{ 'accessibility.link_messages.new_window' | t }}</li>
+  </ul>
+
+  <script>
+    window.shopUrl = '{{ shop.url }}';
+    window.routes = {
+      cart_add_url: '{{ routes.cart_add_url }}',
+      cart_change_url: '{{ routes.cart_change_url }}',
+      cart_update_url: '{{ routes.cart_update_url }}',
+      cart_url: '{{ routes.cart_url }}',
+      predictive_search_url: '{{ routes.predictive_search_url }}'
+    };
+
+    window.cartStrings = {
+      error: `{{ 'sections.cart.cart_error' | t }}`,
+      quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t: quantity: '[quantity]' }}`
+    }
+
+    window.variantStrings = {
+      addToCart: `{{ 'products.product.add_to_cart' | t }}`,
+      soldOut: `{{ 'products.product.sold_out' | t }}`,
+      unavailable: `{{ 'products.product.unavailable' | t }}`,
+      unavailableWith: `{{ 'products.product.unavailable_with_option' | t }}`
+    }
+
+    window.accessibilityStrings = {
+      imageAvailable: `{{ 'products.product.media.image_available' | t: index: '[index]' }}`,
+      shareSuccess: `{{ 'general.share.success_message' | t }}`,
+      pauseSlideshow: `{{ 'sections.slideshow.pause_slideshow' | t }}`,
+      playSlideshow: `{{ 'sections.slideshow.play_slideshow' | t }}`
+    }
+  </script>
+
+  {{ 'empire-domination.js' | asset_url | script_tag }}
+</body>
+</html>

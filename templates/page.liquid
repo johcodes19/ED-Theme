@@ -1,0 +1,62 @@
+<div class="background-animation"></div>
+
+<div class="page-container">
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">{{ page.title }}</h1>
+            {% if page.content != blank %}
+                <div class="page-content">
+                    {{ page.content }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<style>
+.page-container {
+    padding: 120px 0 80px;
+    min-height: 80vh;
+}
+
+.page-header {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.page-title {
+    font-size: 3em;
+    font-weight: 900;
+    color: #FFD700;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+}
+
+.page-content {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 20px;
+    padding: 40px;
+    color: #ffffff;
+    font-size: 1.1em;
+    line-height: 1.8;
+}
+
+.page-content h2, .page-content h3 {
+    color: #FFD700;
+    margin: 30px 0 15px;
+}
+
+.page-content a {
+    color: #FFD700;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.page-content a:hover {
+    color: #FFA500;
+}
+</style>
